@@ -1,7 +1,11 @@
 package com.tchaikop.sbb.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
+import org.hibernate.annotations.Cascade;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,7 +34,8 @@ public class Question {
 	
 	private LocalDateTime createDate;
 	
-	@OneToMany
-	private Answer answer;
+	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)  //1대 n 관계
+	//질문 글이 사라지면 질문글에 달린 답변글이 사라지는 옵션
+	private ArrayList<Answer> answerList; // 질문 하나에 답변이 여러개 저장 될 수 있는 자리를 마련
 
 }

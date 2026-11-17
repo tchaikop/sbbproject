@@ -29,7 +29,8 @@ public class Answer {
 	
 	private LocalDateTime createDate;
 	
-	//부모들의 정보가 명시
+	//답변이 달릴 질문(부모)글의 정보가 명시
+	// 부모가 한명이니까 one인것이고 답변은 여러개 있을 수 있으니가 many
 	
 	@ManyToOne
 	private Question question;  //답변이 달릴 부모 질문글의 모든 정보가 담긴 질문글  1개 객체가 저장
