@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.tchaikop.sbb.entity.Question;
 import com.tchaikop.sbb.repository.QuestionRepository;
+import com.tchaikop.sbb.service.QuestionService;
 
 
 @Controller
@@ -19,7 +20,7 @@ import com.tchaikop.sbb.repository.QuestionRepository;
 public class QuestionController {
 	
 		@Autowired
-		private QuestionRepository questionRepository;
+		private QuestionService questionService;
 		
 		@GetMapping("/")
 		public String root() {
@@ -30,7 +31,7 @@ public class QuestionController {
 		@GetMapping("/question/list")  //모든 질문 목록 요청
 		public String list(Model model) {
 			
-			List<Question> questionList = questionRepository.findAll();
+			List<Question> questionList = questionService.getQuestionlist();
 			//모델 객체의 질문리스트 list 전송해주기
 			model.addAttribute("questionList", questionList);
 			
