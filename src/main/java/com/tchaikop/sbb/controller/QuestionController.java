@@ -1,5 +1,6 @@
 package com.tchaikop.sbb.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,22 @@ public class QuestionController {
 			model.addAttribute("questionList", questionList);
 			
 			return "question_list";  //.html은 쓰지 않는다
+		}
+		
+		@GetMapping("/test")
+		public String test(Model model) {
+			
+			model.addAttribute("name", "홍길동");
+			model.addAttribute("age", 25);
+			model.addAttribute("loginId", "tiger");
+			
+			
+			ArrayList<String> strs = new ArrayList<>();
+			strs.add("이순신");
+			strs.add("김유신");
+			strs.add("강감찬");
+			
+			model.addAttribute("strs", strs);
+			return "test";
 		}
 }
