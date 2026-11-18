@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.tchaikop.sbb.entity.Question;
 import com.tchaikop.sbb.repository.QuestionRepository;
@@ -31,7 +32,7 @@ public class QuestionController {
 		@GetMapping("/question/list")  //모든 질문 목록 요청
 		public String list(Model model) {
 			
-			List<Question> questionList = questionService.getQuestionlist();
+			List<Question> questionList = QuestionRepository.getQuestionlist();
 			//모델 객체의 질문리스트 list 전송해주기
 			model.addAttribute("questionList", questionList);
 			
@@ -53,5 +54,20 @@ public class QuestionController {
 			
 			model.addAttribute("strs", strs);
 			return "test";
+		}
+		
+		@GetMapping("/question/detail/{id}")
+		//질문글 번호가 들어올 자리에 {변수이름}을 선언
+		public String detail(@PathVariable("id")Integer id,Model model) {
+			
+			//service에 유저가 클릭한 글의번호에 해당하는 엔터티를 가져오는 호출
+			Question question = questionService.getQuestion(id);
+			
+			if(question != null) {
+				model.addAttribute("question", question);
+			}else {
+				model.addAttribute("errMsg", "선택하신글이 없다");
+			}
+			return "question_detail";
 		}
 }

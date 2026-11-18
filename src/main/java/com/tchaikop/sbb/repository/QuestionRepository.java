@@ -22,6 +22,10 @@ public interface QuestionRepository extends JpaRepository<Question, Integer>{
 	
 	// delete from question where subject like ?;
 	void deleteBySubjectLike(String keyword);
+	static List<Question> getQuestionlist() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	
