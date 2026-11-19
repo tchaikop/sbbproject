@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,11 +34,11 @@ public class QuestionController {
 		}
 		
 	
-		@GetMapping("/list")  //모든 질문 목록 요청
-		public String list(Model model) {
+		@GetMapping("/list")  //모든 질문 목록 요청 ->question/list?page=3 초기값을 0으로 첫화면이니까
+		public String list(Model model,@RequestParam(value="page",defaultValue = "0")int page) {
 			
-			List<QuestionDto> questionList = questionService.getQuestionlist();
-			model.addAttribute("questionList", questionList);
+			Page<Question> pageList = questionService.getQuestionlist(page);
+			model.addAttribute("questionList",pageList);
 			
 			return "question_list";  //.html은 쓰지 않는다
 		}

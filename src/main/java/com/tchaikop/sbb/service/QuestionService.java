@@ -1,11 +1,12 @@
 package com.tchaikop.sbb.service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.tchaikop.sbb.dto.QuestionDto;
@@ -21,25 +22,20 @@ public class QuestionService {
 	@Autowired
 	private QuestionRepository questionRepository;
 	
-	public List<QuestionDto> getQuestionlist() {
-		List<Question> questionList = questionRepository.findAllByOrderByCreateDateDesc(); 
+	public Page<Question> getQuestionlist(int page) {
+	//	List<Question> questionList = questionRepository.findAllByOrderByCreateDateDesc(); 
 		//질문 등록일의 내림 차순으로 정렬하여 글목록이 반환
 		
-		List questionDtoList = new ArrayList<>();
 		
-		for(Question question:questionList){
-			QuestionDto qDto = new QuestionDto();
-			
-			qDto.setId(question.getId());
-			qDto.setSubject(question.getSubject());
-			qDto.setContent(question.getContent());
-			qDto.setCreateDate(question.getCreateDate());
-			
-			questionDtoList.add(qDto);
-			
+		Pageable pageable = PageRequest.of(page,10);  
+		//앞의 것이 유저가 클릭한 페이지 뒤의 것은 한 페이지에 보일 갯수
+		
+	Page<Question>	pageList = questionRepository.findAll(pageable);
+
+		
 	
-}
-		return questionDtoList;
+
+		return pageList;
 	}
 	
 	public Question getQuestion(Integer id) {

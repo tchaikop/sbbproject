@@ -1,5 +1,8 @@
 package com.tchaikop.sbb.repository;
 
+
+import org.springframework.boot.data.autoconfigure.web.DataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.tchaikop.sbb.entity.Question;
@@ -15,6 +18,8 @@ public interface QuestionRepository extends JpaRepository<Question, Integer>{
 	List<Question> findAllByOrderByCreateDateDesc();
 	
 	
+	
+	
 	List<Question> findBySubjectLike(String subject);
 	//select * from question where like ?
 	
@@ -27,12 +32,10 @@ public interface QuestionRepository extends JpaRepository<Question, Integer>{
 	
 	// delete from question where subject like ?;
 	void deleteBySubjectLike(String keyword);
-	static List<Question> getQuestionlist() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
-	
+	//페이징 처리 후 질문글 목록 부러오기 메소드
+	Page<Question> findAll(Pageable pageable);
+	// pageable  사용자가 클릭한 펭지 바ㅓㄴ호, 한 페이지 당 보여질 질무글의 갯수
 	
 
 }
