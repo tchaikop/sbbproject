@@ -1,5 +1,6 @@
 package com.tchaikop.sbb.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -47,6 +48,16 @@ public class QuestionService {
 		}else {
 			return null;
 		}
+		
+	}
+	
+	public void createQuestion(String subject, String content) {
+		
+		Question q = new Question();
+		q.setSubject(subject);
+		q.setContent(content);
+		q.setCreateDate(LocalDateTime.now());
+		questionRepository.save(q);
 		
 	}
 
