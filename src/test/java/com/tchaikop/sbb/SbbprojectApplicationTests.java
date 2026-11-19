@@ -167,18 +167,24 @@ class SbbprojectApplicationTests {
 //		 }
 		
 	
+//	@Test
+//	@DisplayName("질문글 삭제")
+//	void testJpa3(){
+//	//	questionRepository.deleteById(3);  //3번글 삭제
+//		
+//		Optional<Question> oq = this.questionRepository.findById(3);
+//		 if(oq.isPresent()) {
+//			 questionRepository.delete(oq.get());
+//		 }
+//	}
+	
 	@Test
-	@DisplayName("질문글 삭제")
-	void testJpa3(){
-	//	questionRepository.deleteById(3);  //3번글 삭제
+	@DisplayName("dummy data 만들기")
+	public void testJpa() {
 		
-		Optional<Question> oq = this.questionRepository.findById(3);
-		 if(oq.isPresent()) {
-			 questionRepository.delete(oq.get());
-		 }
+		
+		
 	}
-	
-	
 	
 	
 }

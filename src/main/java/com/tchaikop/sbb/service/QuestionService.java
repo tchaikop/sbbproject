@@ -22,7 +22,8 @@ public class QuestionService {
 	private QuestionRepository questionRepository;
 	
 	public List<QuestionDto> getQuestionlist() {
-		List<Question> questionList = questionRepository.findAll();
+		List<Question> questionList = questionRepository.findAllByOrderByCreateDateDesc(); 
+		//질문 등록일의 내림 차순으로 정렬하여 글목록이 반환
 		
 		List questionDtoList = new ArrayList<>();
 		
