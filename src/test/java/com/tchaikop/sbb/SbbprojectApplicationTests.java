@@ -14,12 +14,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.tchaikop.sbb.entity.Question;
 import com.tchaikop.sbb.repository.QuestionRepository;
+import com.tchaikop.sbb.service.QuestionService;
 
 @SpringBootTest
 class SbbprojectApplicationTests {
 	
 	@Autowired  //DI 의존성 주입
 	private QuestionRepository questionRepository;
+	@Autowired
+	private QuestionService questionService;
 
 	//질문 저장 테스트
 //	@Test
@@ -182,7 +185,11 @@ class SbbprojectApplicationTests {
 	@DisplayName("dummy data 만들기")
 	public void testJpa() {
 		
-		
+		for(int i=1;i<=300;i++) {
+			String subject = "테스트 질문 데이터야"+i;
+			String content = " 내용이야"+i;
+			questionService.createQuestion(subject,content);
+		}
 		
 	}
 	
