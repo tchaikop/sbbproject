@@ -27,6 +27,8 @@ public class SecurityConfig {
 					//로그인 페이지나 호원가입 페이지 처럼 누구나 봐야할 페이지만 접근가능하게 설정
 					.requestMatchers(
 							"/",
+							"/*.css",
+							"/index.css",
 							"/user/login",
 							"/user/signup",
 							"/css/**",
