@@ -25,20 +25,17 @@ public class QuestionService {
 	private QuestionRepository questionRepository;
 	
 	public Page<Question> getQuestionlist(int page) {
-	//	List<Question> questionList = questionRepository.findAllByOrderByCreateDateDesc(); 
-		//질문 등록일의 내림 차순으로 정렬하여 글목록이 반환
+	
+		
 		 List<Sort.Order> sorts = new ArrayList<>();
-	        sorts.add(Sort.Order.desc("createDate"));
+	     sorts.add(Sort.Order.desc("createDate"));// 작성일의 내림차순
 		
 		Pageable pageable = PageRequest.of(page,10,Sort.by(sorts));  
-		//앞의 것이 유저가 클릭한 페이지 뒤의 것은 한 페이지에 보일 갯수
+		// 유저가 클릭한 페이지 번호,  한 페이지에 보일 갯수
 		
 	Page<Question>	pageList = questionRepository.findAll(pageable);
 
-		
-	
-
-		return pageList;
+			return pageList;
 	}
 	
 	public Question getQuestion(Integer id) {
